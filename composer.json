@@ -30,6 +30,7 @@
   "require": {
     "typo3/cms-core": "^9.5 || ^10.0"
   },
+  "version": "2.0.0",
   "suggest": {
     "friendsoftypo3/headless": "^1.0"
   },

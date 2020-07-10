@@ -1,6 +1,6 @@
 {namespace vh=In2code\Powermail\ViewHelpers}
 <f:spaceless>
-    <hlpowermail:form.registerField property="{field.marker}"/>
+    <headlesspowermail:form.registerField property="{field.marker}"/>
     <f:format.raw>
         <f:format.json value="{
             field: {
@@ -12,7 +12,7 @@
                 offsetClasses: settings.styles.framework.offsetClasses,
                 text: '{field.text -> f:format.raw()}',
                 htmlForHtmlFields: settings.misc.htmlForHtmlFields,
-                name: '{hlpowermail:form.generateName(property:field.marker)}'
+                name: '{headlesspowermail:form.generateName(property:field.marker)}'
             }
         }"/>
     </f:format.raw>

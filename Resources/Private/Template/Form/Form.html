@@ -17,7 +17,7 @@
                 formClasses: '{settings.styles.framework.formClasses}',
                 moreSteps: '{vh:misc.morestepClass(activate:settings.main.moresteps)}',
                 title: form.title,
-                fields: '{f:render(partial: \'Form/Pages\', arguments: \'{_all}\') -> headless:format.json.decode() -> hlpowermail:form(action:action, name:\'field\', formUid:form.uid) -> headless:format.json.decode()}'
+                fields: '{f:render(partial: \'Form/Pages\', arguments: \'{_all}\') -> headless:format.json.decode() -> headlesspowermail:form(action:action, name:\'field\', formUid:form.uid) -> headless:format.json.decode()}'
             }
         }"/>
 	</f:format.raw>

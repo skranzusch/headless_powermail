@@ -11,10 +11,10 @@
                 fieldWrappingClasses: settings.styles.framework.fieldWrappingClasses,
                 fieldClasses: settings.styles.framework.fieldClasses,
                 offsetClasses: settings.styles.framework.offsetClasses,
-                name: '{hlpowermail:form.generateName(property:\'{field.marker}.\')}',
+                name: '{headlesspowermail:form.generateName(property:\'{field.marker}.\')}',
                 additionalAttributes: '{vh:validation.uploadAttributes(field:field)}',
                 errorClass: '{vh:validation.errorClass(field:field, class: \'powermail_field_error\')}',
-                additionalGeneratedAttributes: '{hlpowermail:form.multiUpload(property:field.marker,additionalAttributes:\'{vh:validation.uploadAttributes(field:field)}\') -> headless:format.json.decode()}'
+                additionalGeneratedAttributes: '{headlesspowermail:form.multiUpload(property:field.marker,additionalAttributes:\'{vh:validation.uploadAttributes(field:field)}\') -> headless:format.json.decode()}'
             }
         }"/>
     </f:format.raw>
