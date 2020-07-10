@@ -1,0 +1,14 @@
+{namespace vh=In2code\Powermail\ViewHelpers}
+<f:spaceless>
+    <f:format.raw>
+        <f:format.json value="{
+            css: field.css,
+            mandatory: field.mandatory,
+            linkedMandatory: field.linkedMandatory,
+            labelClasses: settings.styles.framework.labelClasses,
+            title: field.title,
+            description: field.description,
+            marker: field.marker
+        }"/>
+    </f:format.raw>
+</f:spaceless>

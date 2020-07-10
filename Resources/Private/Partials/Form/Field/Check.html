@@ -1,0 +1,44 @@
+{namespace vh=In2code\Powermail\ViewHelpers}
+<f:spaceless>
+    <headlesspowermail:form.registerField property="{field.marker}."
+                            value="{setting.value}"
+                            checked="{vh:misc.prefillMultiField(field:field, mail:mail, cycle:index.cycle)}"/>
+        <f:format.raw>
+            <f:format.json value="{
+                field: {
+                    label: '{f:render(partial: \'Form/FieldLabel\', arguments: \'{_all}\') -> headless:format.json.decode()}',
+                    marker: field.marker,
+                    name: '{headlesspowermail:form.generateName(property:\'{field.marker}.\')}',
+                    css: field.css,
+                    fieldWrappingClasses: settings.styles.framework.fieldWrappingClasses,
+                    fieldAndLabelWrappingClasses: settings.styles.framework.fieldAndLabelWrappingClasses,
+                    checkClasses: settings.styles.framework.checkClasses,
+                    validationClass: '{vh:validation.errorClass(field:field, class:\'powermail_field_error\')}',
+                    additionalAttributes: '{vh:validation.validationDataAttribute(field:field, iteration:iteration)}',
+                    type: 'check',
+                    options: '{f:render(section:\'checkbox\',arguments:\'{_all}\') -> headless:format.json.decode()}',
+                    client: settings.validation.client
+                }
+            }"/>
+        </f:format.raw>
+</f:spaceless>
+
+<f:section name="checkbox">
+    <f:spaceless>
+        [
+        <f:for each="{field.modifiedSettings}" as="setting" iteration="iteration">
+            <f:format.raw>
+                <f:format.json value="{
+                    value: setting.value,
+                    label: setting.label,
+                    isSelected: setting.selected,
+                    cycle: iteration.cycle,
+                    checked: '{vh:misc.prefillMultiField(field:field, mail:mail, cycle:iteration.cycle)}',
+                    additionalAttributes: '{vh:validation.validationDataAttribute(field:field, iteration:iteration)}'
+                }"/>
+            </f:format.raw>{f:if(condition:iteration.isLast,else:',')}
+        </f:for>
+        ]
+    </f:spaceless>
+</f:section>
+

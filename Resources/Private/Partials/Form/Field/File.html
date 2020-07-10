@@ -1,0 +1,21 @@
+{namespace vh=In2code\Powermail\ViewHelpers}
+<f:spaceless>
+    <f:format.raw>
+        <f:format.json value="{
+            field: {
+                label: '{f:render(partial: \'Form/FieldLabel\', arguments: \'{_all}\') -> headless:format.json.decode()}',
+                type: 'file',
+                marker: field.marker,
+                css: field.css,
+                fieldAndLabelWrappingClasses: settings.styles.framework.fieldAndLabelWrappingClasses,
+                fieldWrappingClasses: settings.styles.framework.fieldWrappingClasses,
+                fieldClasses: settings.styles.framework.fieldClasses,
+                offsetClasses: settings.styles.framework.offsetClasses,
+                name: '{headlesspowermail:form.generateName(property:\'{field.marker}.\')}',
+                additionalAttributes: '{vh:validation.uploadAttributes(field:field)}',
+                errorClass: '{vh:validation.errorClass(field:field, class: \'powermail_field_error\')}',
+                additionalGeneratedAttributes: '{headlesspowermail:form.multiUpload(property:field.marker,additionalAttributes:\'{vh:validation.uploadAttributes(field:field)}\') -> headless:format.json.decode()}'
+            }
+        }"/>
+    </f:format.raw>
+</f:spaceless>

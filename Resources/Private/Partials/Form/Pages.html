@@ -1,0 +1,9 @@
+<f:spaceless>
+    <f:format.raw>
+        [
+        <f:for each="{form.pages}" as="page" iteration="iteration">
+            <f:render partial="Form/Page" arguments="{_all}" />{f:if(condition:iteration.isLast,else:',')}
+        </f:for>
+        ]
+    </f:format.raw>
+</f:spaceless>

@@ -1,0 +1,10 @@
+{namespace vh=In2code\Powermail\ViewHelpers}
+<f:spaceless>
+    <f:format.raw>
+        [
+            <f:for each="{page.fields}" as="field" iteration="iteration">
+                <f:render partial="Form/Field/{vh:String.Upper(string:field.type)}" arguments="{_all}" />{f:if(condition:iteration.isLast,else:',')}
+            </f:for>
+        ]
+    </f:format.raw>
+</f:spaceless>

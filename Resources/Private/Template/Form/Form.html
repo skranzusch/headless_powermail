@@ -1,0 +1,24 @@
+{namespace vh=In2code\Powermail\ViewHelpers}
+<f:spaceless>
+	<f:alias map="{flashMessageClass:'powermail_message_error'}">
+		<f:render partial="Misc/FlashMessages" arguments="{_all}" />
+	</f:alias>
+	<f:format.raw>
+
+		<f:format.json value="{
+            form: {
+                action: action,
+                section: 'c{ttContentData.uid}',
+                additionalAttributes: '{vh:validation.enableParsleyAndAjax(form:form)}',
+                addQueryString: settings.misc.addQueryString,
+                css: form.css,
+                formUid: form.uid,
+                showTitle: form.showTitle,
+                formClasses: '{settings.styles.framework.formClasses}',
+                moreSteps: '{vh:misc.morestepClass(activate:settings.main.moresteps)}',
+                title: form.title,
+                fields: '{f:render(partial: \'Form/Pages\', arguments: \'{_all}\') -> headless:format.json.decode() -> headlesspowermail:form(action:action, name:\'field\', formUid:form.uid) -> headless:format.json.decode()}'
+            }
+        }"/>
+	</f:format.raw>
+</f:spaceless>
