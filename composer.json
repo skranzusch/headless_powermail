@@ -1,0 +1,41 @@
+{
+  "name": "friendsoftypo3/headless_powermail",
+  "type": "typo3-cms-extension",
+  "description": "This extension provides integration with powermail to output content from TYPO3 in JSON format.",
+  "keywords": [
+    "TYPO3",
+    "headless",
+    "pwa",
+    "json",
+    "powermail"
+  ],
+  "license": [
+    "GPL-2.0-or-later"
+  ],
+  "authors": [
+    {
+      "name": "Tymoteusz Motylewski",
+      "role": "Head"
+    },
+    {
+      "name": "Oskar Dydo",
+      "role": "Developer"
+    },
+    {
+      "name": "TYPO3 PWA Initiative",
+      "role": "Developer",
+      "email": "extensions@macopedia.com"
+    }
+  ],
+  "require": {
+    "typo3/cms-core": "^9.5 || ^10.0"
+  },
+  "suggest": {
+    "friendsoftypo3/headless": "^1.0"
+  }
+  "autoload": {
+    "psr-4": {
+      "FriendsOfTYPO3\\HeadlessPowermail\\": "Classes"
+    }
+  }
+}

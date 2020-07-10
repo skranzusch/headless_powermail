@@ -1,0 +1,14 @@
+{namespace vh=In2code\Powermail\ViewHelpers}
+<f:spaceless>
+    <hlpowermail:form.registerField property="{field.marker}"/>
+    <f:format.raw>
+        <f:format.json value="{
+            field: {
+                type: 'hidden',
+                marker: field.marker,
+                value: '{vh:misc.prefillField(field:field, mail:mail)}',
+                css: field.css
+            }
+        }"/>
+    </f:format.raw>
+</f:spaceless>
