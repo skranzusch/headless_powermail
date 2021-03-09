@@ -38,7 +38,7 @@
     "typo3/cms": {
        "extension-key": "headless_powermail"
      }
-  }
+  },
   "autoload": {
     "psr-4": {
       "FriendsOfTYPO3\\HeadlessPowermail\\": "Classes"
