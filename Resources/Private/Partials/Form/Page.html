@@ -3,6 +3,7 @@
     <f:format.raw>
         <f:format.json value="{
             title: page.title,
+            css: page.css,
             pageId: page.uid,
             fields: '{f:render(partial: \'Form/Fields\', arguments: \'{_all}\') -> headless:format.json.decode()}'
         }"/>
