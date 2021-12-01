@@ -14,10 +14,10 @@
 <f:section name="main">
 	<f:translate key="optin_mail_link" /><br>
 
+	<f:variable name="uri" value="{f:uri.action(action:'optinConfirm',absolute:1,arguments:'{hash:hash,mail:mail}',section:'powermail') -> headlesspowermail:frontendUrl(pid:mail.pid)}" />
+
 	<f:format.htmlentitiesDecode>
-		<f:link.action action="optinConfirm" absolute="1" arguments="{hash: hash, mail: mail}">
-			<f:uri.action action="optinConfirm" absolute="1" arguments="{hash: hash, mail: mail}" />
-		</f:link.action>
+		<a href="{uri}" target="_blank">{uri}</a>
 	</f:format.htmlentitiesDecode>
 
 	<br><br><hr>
