@@ -1,0 +1,7 @@
+<f:if condition="{settings.sender.addDisclaimerLink} && {mail.uid}">
+	<f:variable name="uri" value="{f:uri.action(action:'disclaimer',absolute:1,arguments:'{hash:hashDisclaimer,mail:mail}',additionalParams:'{L:L}') -> headlesspowermail:frontendUrl(pid:mail.pid)}" />
+	<p>
+		<f:translate key="disclaimer_mailmessage">Do you want to delete your request?</f:translate><br />
+		<a href="{uri}" target="_blank"><f:translate key="disclaimer_mailmessage_link">delete</f:translate></a>
+	</p>
+</f:if>
