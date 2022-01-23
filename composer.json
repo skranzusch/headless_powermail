@@ -28,10 +28,10 @@
     }
   ],
   "require": {
-    "typo3/cms-core": "^9.5 || ^10.0"
+    "typo3/cms-core": "^11.5"
   },
   "suggest": {
-    "friendsoftypo3/headless": "^1.0"
+    "friendsoftypo3/headless": "^3.0"
   },
   "extra": {
     "typo3/cms": {

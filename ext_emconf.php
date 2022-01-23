@@ -11,9 +11,8 @@ $EM_CONF[$_EXTKEY] = [
     'version' => '2.1.0',
     'constraints' => [
         'depends' => [
-            'typo3' => '9.5.0-10.4.99',
-            'frontend' => '9.5.0-10.4.99',
-            'powermail' => '^7.4',
+            'typo3' => '10.5.0-11.5.99',
+            'powermail' => '',
         ],
         'conflicts' => [],
         'suggests' => [],
