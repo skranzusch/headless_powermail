@@ -1,8 +1,8 @@
 plugin.tx_powermail {
     view {
-        templateRootPaths.20 = EXT:headless_powermail/Resources/Private/Template/
+        templateRootPaths.20 = EXT:headless_powermail/Resources/Private/Templates/
         partialRootPaths.20 = EXT:headless_powermail/Resources/Private/Partials/
-        layoutRootPaths.20 = EXT:headless_powermail/Resources/Private/Layout/
+        layoutRootPaths.20 = EXT:headless_powermail/Resources/Private/Layouts/
     }
 }
 
