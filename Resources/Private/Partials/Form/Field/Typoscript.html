@@ -1,0 +1,17 @@
+<f:spaceless>
+    <headlesspowermail:form.registerField property="{field.marker}"/>
+    <f:format.raw>
+        <f:format.json value="{
+            field: {
+                type: 'html',
+                marker: field.marker,
+                css: field.css,
+                fieldAndLabelWrappingClasses: settings.styles.framework.fieldAndLabelWrappingClasses,
+                fieldWrappingClasses: settings.styles.framework.fieldWrappingClasses,
+                offsetClasses: settings.styles.framework.offsetClasses,
+                text: '{f:cObject(typoscriptObjectPath:field.path) -> f:format.raw()}',
+                name: '{headlesspowermail:form.generateName(property:\'{field.marker}.\')}'
+            }
+        }"/>
+    </f:format.raw>
+</f:spaceless>
