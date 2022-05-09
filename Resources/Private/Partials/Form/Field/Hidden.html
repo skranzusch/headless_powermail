@@ -6,6 +6,7 @@
             field: {
                 type: 'hidden',
                 marker: field.marker,
+                name: '{headlesspowermail:form.generateName(property:field.marker)}',
                 value: '{vh:misc.prefillField(field:field, mail:mail)}',
                 css: field.css
             }
