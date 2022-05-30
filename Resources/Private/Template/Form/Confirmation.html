@@ -1,0 +1,74 @@
+{namespace vh=In2code\Powermail\ViewHelpers}
+<f:spaceless>
+	<f:alias map="{flashMessageClass:'powermail_message_error'}">
+		<f:render partial="Misc/FlashMessages" arguments="{_all}" />
+	</f:alias>
+	<f:format.raw>
+		<f:format.json value="{
+			view: 'confirmation',
+			title: '{f:translate(key:\'confirmation_message\')}',
+			table: powermail_all,
+			backForm: {
+				fields: '{f:render(section: \'BackForm\', arguments: \'{_all}\') -> headless:format.json.decode() -> headlesspowermail:form(action:\'form\', name:\'field\', formUid:mail.form.uid) -> headless:format.json.decode()}',
+				submitLabel: '{f:translate(key:\'confirmation_prev\')}'
+			},
+			forwardForm: {
+				fields: '{f:render(section: \'ForwardForm\', arguments: \'{_all}\') -> headless:format.json.decode() -> headlesspowermail:form(action:\'create\', name:\'field\', formUid:mail.form.uid) -> headless:format.json.decode()}',
+				submitLabel: '{f:translate(key:\'confirmation_next\')}'
+			}
+		}" />
+	</f:format.raw>
+</f:spaceless>
+
+<f:section name="BackForm">
+<f:spaceless>
+	<f:format.raw>
+		<f:format.json value="{
+			fields: '{f:render(section: \'HiddenFields\', arguments: \'{_all}\') -> headless:format.json.decode()}'
+		}" />
+	</f:format.raw>
+</f:spaceless>
+</f:section>
+
+<f:section name="ForwardForm">
+<f:spaceless>
+	<f:format.raw>
+		<f:format.json value="{
+			fields: '{f:render(section: \'HiddenFields\', arguments: \'{_all}\') -> headless:format.json.decode()}'
+		}" />
+	</f:format.raw>
+</f:spaceless>
+</f:section>
+
+<f:section name="HiddenFields">
+	<f:format.raw>
+		[
+			<f:for each="{mail.answers}" as="answer" iteration="iterator">
+				<headlesspowermail:form.registerField property="{answer.field.marker}" />
+				<f:if condition="{vh:condition.isArray(val:answer.value)}">
+					<f:then>
+						<f:for each="{answer.value}" as="subvalue" iteration="i">
+							<f:format.json value="{
+								field: {
+									type: 'hidden',
+									name: '{headlesspowermail:form.generateName(property:\'{answer.field.marker}.{i.index}\')}',
+									value: '{subvalue}'
+								}
+							}" /><f:if condition="{i.isLast}"><f:else>,</f:else></f:if>
+						</f:for>
+					</f:then>
+					<f:else>
+						<f:format.json value="{
+							field: {
+								type: 'hidden',
+								name: '{headlesspowermail:form.generateName(property:answer.field.marker)}',
+								value: '{answer.value}'
+							}
+						}" />
+					</f:else>
+				</f:if>
+				<f:if condition="{iterator.isLast}"><f:else>,</f:else></f:if>
+			</f:for>
+		]
+	</f:format.raw>
+</f:section>
