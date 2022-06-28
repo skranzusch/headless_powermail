@@ -8,7 +8,7 @@
                 field: {
                     label: '{f:render(partial: \'Form/FieldLabel\', arguments: \'{_all}\') -> headless:format.json.decode()}',
                     marker: field.marker,
-                    name: '{headlesspowermail:form.generateName(property:\'{field.marker}.\')}',
+                    name: '{headlesspowermail:form.generateName(property:\'{field.marker}\')}',
                     css: field.css,
                     fieldWrappingClasses: settings.styles.framework.fieldWrappingClasses,
                     fieldAndLabelWrappingClasses: settings.styles.framework.fieldAndLabelWrappingClasses,
