@@ -17,7 +17,7 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\HeadlessPowermail\ViewHelpers;
 
-use FriendsOfTYPO3\Headless\Service\SiteService;
+use FriendsOfTYPO3\Headless\Utility\UrlUtility;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -38,9 +38,9 @@ class FrontendUrlViewHelper extends AbstractViewHelper
         $url = $arguments['url'] ?? $renderChildrenClosure();
         $pid = $arguments['pid'];
 
-        $siteService = GeneralUtility::makeInstance(SiteService::class);
+        $urlUtility = GeneralUtility::makeInstance(UrlUtility::class);
 
-        $url = $siteService->getFrontendUrl($url, $pid);
+        $url = $urlUtility->getFrontendUrlForPage($url, $pid);
 
         return $url;
     }
