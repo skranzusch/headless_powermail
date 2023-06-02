@@ -1,11 +1,18 @@
 {namespace vh=In2code\Powermail\ViewHelpers}
 <f:spaceless>
-	<f:alias map="{flashMessageClass:'powermail_message_error'}">
-		<f:render partial="Misc/FlashMessages" arguments="{_all}" />
-	</f:alias>
-	<f:format.raw>
+    <f:variable name="messages">
+        <f:alias map="{flashMessageClass:'powermail_message_error'}">
+            <f:render partial="Misc/FlashMessages" arguments="{_all}" />
+        </f:alias>
+    </f:variable>
+    <f:variable name="errors">
+        <f:render partial="Misc/FormError" arguments="{_all}" />
+    </f:variable>
 
-		<f:format.json value="{
+    <f:format.raw>
+        <f:format.json value="{
+            messages: '{messages -> f:spaceless()}',
+            errors: '{errors -> f:spaceless()}',
             form: {
                 action: action,
                 section: 'c{ttContentData.uid}',
@@ -20,5 +27,5 @@
                 fields: '{f:render(partial: \'Form/Pages\', arguments: \'{_all}\') -> headless:format.json.decode() -> headlesspowermail:form(action:action, name:\'field\', formUid:form.uid) -> headless:format.json.decode()}'
             }
         }"/>
-	</f:format.raw>
+    </f:format.raw>
 </f:spaceless>
