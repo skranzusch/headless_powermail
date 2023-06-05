@@ -1,3 +1,14 @@
+plugin.tx_powermail {
+    settings {
+        setup {
+            finishers {
+                # Override powermail's RedirectFinisher
+                100.class = FriendsOfTYPO3\HeadlessPowermail\Finisher\RedirectFinisher
+            }
+        }
+    }
+}
+
 tt_content.list =< lib.contentElementWithHeader
 tt_content.list {
     fields {
