@@ -1,6 +1,7 @@
 {namespace vh=In2code\Powermail\ViewHelpers}
 <f:spaceless>
-    <headlesspowermail:form.registerField property="{field.marker}"
+    <f:variable name="fieldMarker" value="{field.marker}{f:if(condition:field.multiselect,then:'.')}" />
+    <headlesspowermail:form.registerField property="{fieldMarker}"
                             value="{setting.value}"
                             checked="{vh:misc.prefillMultiField(field:field, mail:mail, cycle:index.cycle)}"/>
     <f:format.raw>
@@ -8,12 +9,14 @@
                 field: {
                     label: '{f:render(partial: \'Form/FieldLabel\', arguments: \'{_all}\') -> headless:format.json.decode()}',
                     marker: field.marker,
-                    name: '{headlesspowermail:form.generateName(property:\'{field.marker}\')}',
+                    name: '{headlesspowermail:form.generateName(property:fieldMarker)}',
                     css: field.css,
                     fieldWrappingClasses: settings.styles.framework.fieldWrappingClasses,
                     fieldAndLabelWrappingClasses: settings.styles.framework.fieldAndLabelWrappingClasses,
                     validationClass: '{vh:validation.errorClass(field:field, class:\'powermail_field_error\')}',
                     additionalAttributes: '{vh:validation.validationDataAttribute(field:field)}',
+                    multiple: field.multiselectForField,
+                    multiselect: field.multiselect,
                     type: 'select',
                     client: settings.validation.client,
                     options: '{f:render(section:\'select\',arguments:\'{_all}\') -> headless:format.json.decode()}'
