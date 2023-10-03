@@ -4,6 +4,14 @@ plugin.tx_powermail {
         partialRootPaths.20 = EXT:headless_powermail/Resources/Private/Partials/
         layoutRootPaths.20 = EXT:headless_powermail/Resources/Private/Layouts/
     }
+    settings {
+        setup {
+            finishers {
+                # Override powermail's RedirectFinisher
+                100.class = FriendsOfTYPO3\HeadlessPowermail\Finisher\RedirectFinisher
+            }
+        }
+    }
 }
 
 tt_content.list =< lib.contentElementWithHeader

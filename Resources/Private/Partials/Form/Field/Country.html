@@ -3,7 +3,7 @@
     <f:variable name="fieldMarker" value="{field.marker}{f:if(condition:field.multiselect,then:'.')}" />
     <headlesspowermail:form.registerField property="{fieldMarker}"
                             value="{setting.value}"
-                            checked="{vh:misc.prefillMultiField(field:field, mail:mail, cycle:iteration.cycle)}"/>
+                            checked="{vh:misc.prefillMultiField(field:field, mail:mail, cycle:index.cycle)}"/>
     <f:format.raw>
         <f:format.json value="{
                 field: {
@@ -26,7 +26,7 @@
 </f:spaceless>
 <f:section name="select">
     <headlesspowermail:form.selectField
-        options="{field.modifiedSettings}"
+        options="{headlesspowermail:form.countries(key:'isoCodeA3',value:'officialNameLocal',sortbyField:'isoCodeA3',sorting:'asc')}"
         property="{field.marker}"
         class="powermail_select {settings.styles.framework.fieldClasses} {vh:validation.errorClass(field:field, class:'powermail_field_error')}"
         id="powermail_field_{field.marker}"
