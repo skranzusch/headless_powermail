@@ -1,5 +1,0 @@
-plugin.tx_powermail.view {
-    templateRootPath = EXT:headless_powermail/Resources/Private/Template/
-    partialRootPath = EXT:headless_powermail/Resources/Private/Partials/
-    layoutRootPath = EXT:headless_powermail/Resources/Private/Layout/
-}

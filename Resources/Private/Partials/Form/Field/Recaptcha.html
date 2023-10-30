@@ -1,0 +1,22 @@
+{namespace vh=In2code\Powermail\ViewHelpers}
+<f:spaceless>
+    <headlesspowermail:form.registerField property="{field.marker}"/>
+    <f:format.raw>
+        <f:format.json value="{
+            field: {
+                type: 'recaptcha',
+                marker: field.marker,
+                css: field.css,
+                fieldAndLabelWrappingClasses: settings.styles.framework.fieldAndLabelWrappingClasses,
+                fieldWrappingClasses: settings.styles.framework.fieldWrappingClasses,
+                offsetClasses: settings.styles.framework.offsetClasses,
+                name: 'g-recaptcha-response',
+                script: '//www.google.com/recaptcha/api.js',
+                div: {
+                    class: 'g-recaptcha',
+                    data-sitekey: '{settings.recaptcha.sitekey}'
+                }
+            }
+        }"/>
+    </f:format.raw>
+</f:spaceless>
