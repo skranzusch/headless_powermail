@@ -19,6 +19,7 @@ class RedirectFinisher extends \In2code\Powermail\Finisher\RedirectFinisher
         $redirectService = GeneralUtility::makeInstance(RedirectUriService::class, $this->contentObject);
         $uri = $redirectService->getRedirectUri();
         if (!empty($uri) && $this->isRedirectEnabled()) {
+            header('Content-Type: application/json');
             echo json_encode([
                 'redirectUrl' => $uri,
                 'statusCode' => 303,
