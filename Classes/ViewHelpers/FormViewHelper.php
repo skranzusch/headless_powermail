@@ -81,7 +81,7 @@ class FormViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\FormViewHelper
     public function render()
     {
         $this->setFormActionUri();
-        if (isset($this->arguments['method']) && strtolower($this->arguments['method']) === 'get') {
+        if (isset($this->arguments['method']) && strtolower((string) $this->arguments['method']) === 'get') {
             $this->tag->addAttribute('method', 'get');
         } else {
             $this->tag->addAttribute('method', 'post');

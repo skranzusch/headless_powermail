@@ -1,6 +1,8 @@
 <?php
 namespace FriendsOfTYPO3\HeadlessPowermail\ViewHelpers\Form;
 
+use TYPO3\CMS\Fluid\ViewHelpers\Form\AbstractFormFieldViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Exception;
 /*
  * This file is part of the TYPO3 CMS project.
  *
@@ -13,7 +15,6 @@ namespace FriendsOfTYPO3\HeadlessPowermail\ViewHelpers\Form;
  *
  * The TYPO3 project - inspiring people to share!
  */
-
 /**
  * ViewHelper which creates a text field :html:`<input type="text">`.
  *
@@ -28,12 +29,12 @@ namespace FriendsOfTYPO3\HeadlessPowermail\ViewHelpers\Form;
  *
  *    <input type="text" name="myTextBox" value="default value" />
  */
-class GenerateNameViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\AbstractFormFieldViewHelper
+class GenerateNameViewHelper extends AbstractFormFieldViewHelper
 {
     /**
      * Initialize the arguments.
      *
-     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
+     * @throws Exception
      */
     public function initializeArguments()
     {

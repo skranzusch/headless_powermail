@@ -72,7 +72,6 @@ class SelectFieldViewHelper extends SelectViewHelper
     }
 
     /**
-     * @param string $value
      * @return array
      */
     protected function getOptionFromOriginalOptionsByValue(string $value): array
@@ -100,7 +99,6 @@ class SelectFieldViewHelper extends SelectViewHelper
     }
 
     /**
-     * @param array $option
      * @return bool
      */
     protected function isSelectedAlternativeForString(array $option): bool
@@ -115,7 +113,6 @@ class SelectFieldViewHelper extends SelectViewHelper
     }
 
     /**
-     * @param array $option
      * @return bool
      */
     protected function isSelectedAlternativeForArray(array $option): bool

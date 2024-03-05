@@ -7,7 +7,6 @@ $EM_CONF[$_EXTKEY] = [
     'author' => 'Oskar Dydo',
     'author_email' => 'extensions@macopedia.pl',
     'category' => 'fe',
-    'internal' => '',
     'version' => '2.0.0',
     'constraints' => [
         'depends' => [
