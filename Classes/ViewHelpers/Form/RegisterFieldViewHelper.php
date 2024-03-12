@@ -20,13 +20,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Exception;
  */
 class RegisterFieldViewHelper extends AbstractFormFieldViewHelper
 {
-
-    /**
-     * Initialize the arguments.
-     *
-     * @throws Exception
-     */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         $this->registerArgument('name', 'string', 'Name of input tag');
         $this->registerArgument('value', 'mixed', 'Value of input tag');
@@ -40,10 +34,7 @@ class RegisterFieldViewHelper extends AbstractFormFieldViewHelper
         $this->registerArgument('multiple', 'bool', 'Specifies whether this checkbox belongs to a multivalue (is part of a checkbox group)', false, false);
     }
 
-    /**
-     * @return string|void
-     */
-    public function render()
+    public function render(): string
     {
         $nameAttribute = $this->getName();
 
@@ -68,5 +59,7 @@ class RegisterFieldViewHelper extends AbstractFormFieldViewHelper
         }
 
         $this->registerFieldNameForFormTokenGeneration($nameAttribute);
+
+        return '';
     }
 }

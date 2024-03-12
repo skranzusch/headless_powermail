@@ -31,12 +31,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Exception;
  */
 class GenerateNameViewHelper extends AbstractFormFieldViewHelper
 {
-    /**
-     * Initialize the arguments.
-     *
-     * @throws Exception
-     */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         $this->registerArgument(
             'property',
@@ -46,10 +41,7 @@ class GenerateNameViewHelper extends AbstractFormFieldViewHelper
         $this->registerArgument('name', 'string', 'Name of input tag');
     }
 
-    /**
-     * @return string|void
-     */
-    public function render()
+    public function render(): string
     {
         return $this->getName();
     }
