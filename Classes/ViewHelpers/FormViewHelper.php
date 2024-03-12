@@ -97,8 +97,8 @@ class FormViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\FormViewHelper
         $this->renderHiddenReferrerFields();
 
         // Render the trusted list of all properties after everything else has been rendered
-        $this->renderTrustedPropertiesField();
         $this->renderFormUidField();
+        $this->renderTrustedPropertiesField();
 
         $this->removeFieldNamePrefixFromViewHelperVariableContainer();
         $this->removeFormObjectFromViewHelperVariableContainer();
@@ -259,7 +259,7 @@ class FormViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\FormViewHelper
      */
     protected function renderTrustedPropertiesField(): string
     {
-        $formFieldNames = $this->viewHelperVariableContainer->get(\TYPO3\CMS\Fluid\ViewHelpers\FormViewHelper::class, 'formFieldNames');
+        $formFieldNames = $this->renderingContext->getViewHelperVariableContainer()->get(\TYPO3\CMS\Fluid\ViewHelpers\FormViewHelper::class, 'formFieldNames');
         $requestHash = $this->mvcPropertyMappingConfigurationService->generateTrustedPropertiesToken($formFieldNames, $this->getFieldNamePrefix());
         $this->addHiddenField($this->prefixFieldName('__trustedProperties'), $requestHash);
 
@@ -274,7 +274,9 @@ class FormViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\FormViewHelper
      */
     protected function renderFormUidField()
     {
-        $this->addHiddenField($this->prefixFieldName('mail[form]'), $this->arguments['formUid']);
+        $fieldName = $this->prefixFieldName('mail[form]');
+        $this->registerFieldNameForFormTokenGeneration($fieldName);
+        $this->addHiddenField($this->prefixFieldName($fieldName), $this->arguments['formUid']);
     }
 
     /**
