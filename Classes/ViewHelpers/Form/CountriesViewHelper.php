@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\HeadlessPowermail\ViewHelpers\Form;
 
-/**
- * Class CountriesViewHelper
- */
-class CountriesViewHelper extends \In2code\Powermail\ViewHelpers\Form\CountriesViewHelper
+use \In2code\Powermail\ViewHelpers\Form\CountriesViewHelper as Powermail_CountriesViewHelper;
+
+class CountriesViewHelper extends Powermail_CountriesViewHelper
 {
     /**
      * Get array with countries
@@ -19,7 +18,7 @@ class CountriesViewHelper extends \In2code\Powermail\ViewHelpers\Form\CountriesV
     {
         $countries = [];
 
-        // EXT:powermail createse a simple one-dimensional array like this:
+        // EXT:powermail creates a simple one-dimensional array like this:
         // [
         //    'AND' => 'Andorra',
         //    'ARE' => 'الإمارات العربيّة المتّحدة',
