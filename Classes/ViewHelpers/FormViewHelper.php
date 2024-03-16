@@ -276,7 +276,7 @@ class FormViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\FormViewHelper
     {
         $fieldName = $this->prefixFieldName('mail[form]');
         $this->registerFieldNameForFormTokenGeneration($fieldName);
-        $this->addHiddenField($this->prefixFieldName($fieldName), $this->arguments['formUid']);
+        $this->addHiddenField($fieldName, $this->arguments['formUid']);
     }
 
     /**
