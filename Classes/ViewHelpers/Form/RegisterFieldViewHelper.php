@@ -1,6 +1,8 @@
 <?php
 namespace FriendsOfTYPO3\HeadlessPowermail\ViewHelpers\Form;
 
+use TYPO3\CMS\Fluid\ViewHelpers\Form\AbstractFormFieldViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Exception;
 /*
  * This file is part of the TYPO3 CMS project.
  *
@@ -13,19 +15,12 @@ namespace FriendsOfTYPO3\HeadlessPowermail\ViewHelpers\Form;
  *
  * The TYPO3 project - inspiring people to share!
  */
-
 /**
  * Registers field for generating hidden fields
  */
-class RegisterFieldViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\AbstractFormFieldViewHelper
+class RegisterFieldViewHelper extends AbstractFormFieldViewHelper
 {
-
-    /**
-     * Initialize the arguments.
-     *
-     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
-     */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         $this->registerArgument('name', 'string', 'Name of input tag');
         $this->registerArgument('value', 'mixed', 'Value of input tag');
@@ -39,10 +34,7 @@ class RegisterFieldViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\Abstract
         $this->registerArgument('multiple', 'bool', 'Specifies whether this checkbox belongs to a multivalue (is part of a checkbox group)', false, false);
     }
 
-    /**
-     * @return string|void
-     */
-    public function render()
+    public function render(): string
     {
         $nameAttribute = $this->getName();
 
@@ -67,5 +59,7 @@ class RegisterFieldViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\Abstract
         }
 
         $this->registerFieldNameForFormTokenGeneration($nameAttribute);
+
+        return '';
     }
 }

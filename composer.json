@@ -28,11 +28,11 @@
     }
   ],
   "require": {
-    "typo3/cms-core": "^11.5",
-    "in2code/powermail": "^10.0"
+    "typo3/cms-core": "^12.4",
+    "in2code/powermail": "^12.0"
   },
   "suggest": {
-    "friendsoftypo3/headless": "^3.0"
+    "friendsoftypo3/headless": "^4.0"
   },
   "extra": {
     "typo3/cms": {

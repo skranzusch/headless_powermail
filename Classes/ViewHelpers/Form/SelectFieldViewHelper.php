@@ -4,17 +4,10 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\HeadlessPowermail\ViewHelpers\Form;
 
-/**
- * Class SelectFieldViewHelper
- */
-class SelectFieldViewHelper extends SelectViewHelper
+use In2code\Powermail\ViewHelpers\Form\SelectFieldViewHelper as Powermail_SelectFieldViewHelper;
+
+class SelectFieldViewHelper extends Powermail_SelectFieldViewHelper
 {
-
-    /**
-     * @var array
-     */
-    protected $originalOptions = [];
-
     /**
      * Render the tag.
      *
@@ -25,32 +18,18 @@ class SelectFieldViewHelper extends SelectViewHelper
     {
         $this->originalOptions = $this->arguments['options'];
         $this->setOptions();
-        return json_encode(parent::render());
+        $options = $this->getOptions();
+        return $this->renderOptionTags($options);
     }
 
-    /**
-     * Set options with key and value from $field->getModifiedOptions()
-     *        convert:
-     *            array(
-     *                array(
-     *                    'label' => 'Red shoes',
-     *                    'value' => 'red',
-     *                    'selected' => 0
-     *                )
-     *            )
-     *
-     *        to:
-     *            array(
-     *                'red' => 'Red shoes'
-     *            )
-     */
-    protected function setOptions(): void
+    protected function renderOptionTags(array $options): string
     {
-        $optionArray = [];
-        foreach ($this->arguments['options'] as $option) {
-            $optionArray[$option['value']] = $option['label'];
+        $optionTags = [];
+        foreach ($options as $value => $label) {
+            $isSelected = $this->isSelectedAlternative($this->getOptionFromOriginalOptionsByValue((string)$value));
+            $optionTags[] = $this->renderOptionTag((string)$value, (string)$label, $isSelected);
         }
-        $this->arguments['options'] = $optionArray;
+        return json_encode($optionTags);
     }
 
     /**
@@ -63,68 +42,10 @@ class SelectFieldViewHelper extends SelectViewHelper
      */
     protected function renderOptionTag($value, $label, $isSelected = false)
     {
-        unset($isSelected);
-        return parent::renderOptionTag(
-            $value,
-            $label,
-            $this->isSelectedAlternative($this->getOptionFromOriginalOptionsByValue((string)$value))
-        );
-    }
-
-    /**
-     * @param string $value
-     * @return array
-     */
-    protected function getOptionFromOriginalOptionsByValue(string $value): array
-    {
-        foreach ($this->originalOptions as $option) {
-            if ((string)$value === $option['value'] || (string)$value === $option['label']) {
-                return $option;
-            }
-        }
-        return [];
-    }
-
-    /**
-     * Check if option is selected
-     *
-     * @param array $option Current option
-     * @return bool TRUE if the value marked a s selected; FALSE otherwise
-     */
-    protected function isSelectedAlternative(array $option): bool
-    {
-        if (is_array($this->getValueAttribute())) {
-            return $this->isSelectedAlternativeForArray($option);
-        }
-        return $this->isSelectedAlternativeForString($option);
-    }
-
-    /**
-     * @param array $option
-     * @return bool
-     */
-    protected function isSelectedAlternativeForString(array $option): bool
-    {
-        if (($option['selected'] && !$this->getValueAttribute()) ||
-            ($this->getValueAttribute() &&
-                ($option['value'] === $this->getValueAttribute() || $option['label'] === $this->getValueAttribute()))
-        ) {
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * @param array $option
-     * @return bool
-     */
-    protected function isSelectedAlternativeForArray(array $option): bool
-    {
-        foreach ($this->getValueAttribute() as $singleValue) {
-            if (!empty($singleValue) && ($option['value'] === $singleValue || $option['label'] === $singleValue)) {
-                return true;
-            }
-        }
-        return false;
+        return [
+            'value' => $value,
+            'label' => $label,
+            'isSelected' => $isSelected,
+        ];
     }
 }

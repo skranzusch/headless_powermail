@@ -4,29 +4,10 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\HeadlessPowermail\ViewHelpers\Form;
 
-use TYPO3\CMS\Fluid\ViewHelpers\Form\UploadViewHelper;
+use In2code\Powermail\ViewHelpers\Form\MultiUploadViewHelper as Powermail_MultiUploadViewHelper;
 
-/**
- * Class MultiUploadViewHelper
- */
-class MultiUploadViewHelper extends UploadViewHelper
+class MultiUploadViewHelper extends Powermail_MultiUploadViewHelper
 {
-
-    /**
-     * Initialize the arguments.
-     *
-     * @api
-     */
-    public function initializeArguments()
-    {
-        parent::initializeArguments();
-    }
-
-    /**
-     * Renders the upload field.
-     *
-     * @return string
-     */
     public function render(): string
     {
         $name = $this->getName();
@@ -35,8 +16,13 @@ class MultiUploadViewHelper extends UploadViewHelper
             $this->registerFieldNameForFormTokenGeneration($name . '[' . $fieldName . '][]');
         }
         $this->tag->addAttribute('type', 'file');
-        $name .= '[]';
-        $this->tag->addAttribute('name', $name);
+
+        if (isset($this->arguments['multiple'])) {
+            $this->tag->addAttribute('name', $name . '[]');
+        } else {
+            $this->tag->addAttribute('name', $name);
+        }
+
         $this->setErrorClassAttribute();
         return $this->renderInput();
     }
@@ -47,7 +33,7 @@ class MultiUploadViewHelper extends UploadViewHelper
      * @return string
      * @api
      */
-    public function renderInput()
+    public function renderInput(): string
     {
         $data = [];
         if (empty($this->tagName)) {
