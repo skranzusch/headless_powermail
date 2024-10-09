@@ -224,13 +224,13 @@ class FormViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\FormViewHelper
     /**
      * Renders a hidden form field containing the technical identity of the given object.
      *
-     * @param object $object Object to create the identity field for
+     * @param mixed $object Object to create the identity field for
      * @param string $name Name
      *
      * @return string A hidden field containing the Identity (uid) of the given object
      * @see \TYPO3\CMS\Extbase\Mvc\Controller\Argument::setValue()
      */
-    protected function renderHiddenIdentityField(?object $object, ?string $name): string
+    protected function renderHiddenIdentityField(mixed $object, ?string $name): string
     {
         if ($object instanceof LazyLoadingProxy) {
             $object = $object->_loadRealInstance();
