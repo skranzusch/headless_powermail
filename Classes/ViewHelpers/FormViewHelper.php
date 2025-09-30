@@ -21,7 +21,7 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
 use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
 use Psr\Http\Message\ServerRequestInterface;
-use FriendsOfTYPO3\HeadlessPowermail\Security\HashScope;
+use TYPO3\CMS\Extbase\Security\HashScope;
 
 /**
  * Form ViewHelper. Generates a :html:`<form>` Tag.
