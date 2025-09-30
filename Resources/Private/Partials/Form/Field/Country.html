@@ -1,9 +1,7 @@
 {namespace vh=In2code\Powermail\ViewHelpers}
 <f:spaceless>
     <f:variable name="fieldMarker" value="{field.marker}{f:if(condition:field.multiselect,then:'.')}" />
-    <headlesspowermail:form.registerField property="{fieldMarker}"
-                            value="{setting.value}"
-                            checked="{vh:misc.prefillMultiField(field:field, mail:mail, cycle:index.cycle)}"/>
+    <headlesspowermail:form.registerField property="{fieldMarker}" />
     <f:format.raw>
         <f:format.json value="{
                 field: {

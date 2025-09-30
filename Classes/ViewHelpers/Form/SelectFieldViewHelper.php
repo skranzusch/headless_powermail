@@ -27,7 +27,7 @@ class SelectFieldViewHelper extends Powermail_SelectFieldViewHelper
         $optionTags = [];
         foreach ($options as $value => $label) {
             $isSelected = $this->isSelectedAlternative($this->getOptionFromOriginalOptionsByValue((string)$value));
-            $optionTags[] = $this->renderOptionTag((string)$value, (string)$label, $isSelected);
+            $optionTags[] = json_decode($this->renderOptionTag((string)$value, (string)$label, $isSelected),true);
         }
         return json_encode($optionTags);
     }
@@ -40,12 +40,12 @@ class SelectFieldViewHelper extends Powermail_SelectFieldViewHelper
      * @param bool $isSelected specifies wether or not to add selected attribute
      * @return string the rendered option tag
      */
-    protected function renderOptionTag($value, $label, $isSelected = false)
+    protected function renderOptionTag($value, $label, $isSelected = false): string
     {
-        return [
+        return json_encode([
             'value' => $value,
             'label' => $label,
             'isSelected' => $isSelected,
-        ];
+        ]);
     }
 }

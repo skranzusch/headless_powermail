@@ -15,10 +15,13 @@ namespace FriendsOfTYPO3\HeadlessPowermail\ViewHelpers;
  * The TYPO3 project - inspiring people to share!
  */
 
+use \TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
 use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
+use Psr\Http\Message\ServerRequestInterface;
+use FriendsOfTYPO3\HeadlessPowermail\Security\HashScope;
 
 /**
  * Form ViewHelper. Generates a :html:`<form>` Tag.
@@ -124,10 +127,7 @@ class FormViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\FormViewHelper
                 );
             }
 
-            /** @var RenderingContext $renderingContext */
-            $renderingContext = $this->renderingContext;
-            /** @var RequestInterface $request */
-            $request = $renderingContext->getRequest();
+            $request = $this->getRequest();
             /** @var UriBuilder $uriBuilder */
             $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
             $uriBuilder
@@ -141,11 +141,6 @@ class FormViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\FormViewHelper
                 ->setAddQueryString($this->arguments['addQueryString'] ?? false)
                 ->setArgumentsToBeExcludedFromQueryString(isset($this->arguments['argumentsToBeExcludedFromQueryString']) ? (array)$this->arguments['argumentsToBeExcludedFromQueryString'] : [])
                 ->setFormat($this->arguments['format'] ?? '');
-
-            $addQueryStringMethod = $this->arguments['addQueryStringMethod'] ?? null;
-            if (is_string($addQueryStringMethod)) {
-                $uriBuilder->setAddQueryStringMethod($addQueryStringMethod);
-            }
 
             $pageUid = (int)($this->arguments['pageUid'] ?? 0);
             if ($pageUid > 0) {
@@ -192,10 +187,7 @@ class FormViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\FormViewHelper
      */
     protected function renderHiddenReferrerFields(): string
     {
-        /** @var RenderingContext $renderingContext */
-        $renderingContext = $this->renderingContext;
-        /** @var RequestInterface $request */
-        $request = $renderingContext->getRequest();
+        $request = $this->getRequest();
         $extensionName = $request->getControllerExtensionName();
         $controllerName = $request->getControllerName();
         $actionName = $request->getControllerActionName();
@@ -207,7 +199,8 @@ class FormViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\FormViewHelper
         $this->addHiddenField($this->prefixFieldName('__referrer[@extension]'), $extensionName);
         $this->addHiddenField($this->prefixFieldName('__referrer[@controller]'), $controllerName);
         $this->addHiddenField($this->prefixFieldName('__referrer[@action]'), $actionName);
-        $this->addHiddenField($this->prefixFieldName('__referrer[@request]'), $this->hashService->appendHmac(json_encode($actionRequest)));
+        $this->addHiddenField($this->prefixFieldName('__referrer[arguments]'), $this->hashService->appendHmac(base64_encode(serialize($request->getArguments())),HashScope::ReferringArguments->prefix()));
+        $this->addHiddenField($this->prefixFieldName('__referrer[@request]'), $this->hashService->appendHmac(json_encode($actionRequest),HashScope::ReferringArguments->prefix()));
 
         return '';
     }
@@ -288,5 +281,20 @@ class FormViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\FormViewHelper
         $this->data['hiddenFields'][$this->i]['name'] = $name;
         $this->data['hiddenFields'][$this->i]['value'] = $value;
         $this->i++;
+    }
+
+    protected function getRequest(): RequestInterface
+    {
+        $renderingContext = $this->renderingContext;
+        if (
+            method_exists($renderingContext, 'getAttribute') &&
+            method_exists($renderingContext, 'hasAttribute') &&
+            $renderingContext->hasAttribute(ServerRequestInterface::class)
+        ) {
+            $request = $renderingContext->getAttribute(ServerRequestInterface::class);
+        } else {
+            $request = $renderingContext->getRequest();
+        }
+        return $request;
     }
 }
